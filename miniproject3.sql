@@ -118,7 +118,12 @@ begin
 	from Enrollment e
     join Student s 
     on s.StudentID = e.StudentID and e.CourseID = p_CourseID
-    where e.Score >= 
+    where e.Score >= (
+    select max(e.Score)
+	from Enrollment e
+    join Student s 
+    on s.StudentID = e.StudentID and e.CourseID = p_CourseID
+		)
 	;
 end $$
 delimiter ;
